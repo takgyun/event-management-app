@@ -6,16 +6,16 @@ export default function EventDetailPage({
   params: { id: string };
 }) {
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
-      <div className="space-y-6">
+    <div className="w-full flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <div className="w-full max-w-6xl space-y-6 sm:space-y-8">
         <Link href="/events" className="text-sm text-blue-500 hover:underline">
           ← 돌아가기
         </Link>
 
         <div>
-          <h1 className="text-3xl font-bold">이벤트 상세</h1>
-          <p className="text-muted-foreground mt-2">ID: {params.id}</p>
-          <p className="text-muted-foreground mt-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">이벤트 상세</h1>
+          <p className="text-sm sm:text-base text-muted-foreground mt-2">ID: {params.id}</p>
+          <p className="text-sm sm:text-base text-muted-foreground mt-4">
             (Phase 2에서 UI 구현 예정)
           </p>
         </div>
