@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js
+.next/
+out/
+build/
+
+# Testing
+coverage/
+
+# Misc
+.DS_Store
+*.pem
+
+# Environment
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+
+# Generated files
+next-env.d.ts
+*.tsbuildinfo
+
+# Package lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

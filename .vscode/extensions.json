@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "unifiedjs.vscode-mdx",
+    "arjun.react-component-explorer",
+    "eamodio.gitlens",
+    "GitHub.copilot"
+  ]
+}
