@@ -6,6 +6,7 @@
   "tailwind": {
     "config": "",
     "css": "app/globals.css",
+    "_comment": "Tailwind CSS v4 사용 - config 파일 불필요 (CSS로 통합됨)",
     "baseColor": "neutral",
     "cssVariables": true,
     "prefix": ""

@@ -73,7 +73,7 @@ export function EventCard({
               </div>
               <div className="mt-1 h-1.5 bg-muted rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-blue-500"
+                  className="h-full bg-primary"
                   style={{ width: `${Math.min(participantPercentage, 100)}%` }}
                 />
               </div>
