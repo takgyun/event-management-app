@@ -30,7 +30,8 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
       });
       if (error) throw error;
       // Update this route to redirect to an authenticated route. The user already has an active session.
-      router.push('/');
+      // 로그인 성공 후 대시보드로 이동
+      router.push('/protected/dashboard');
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : '오류가 발생했습니다');
     } finally {
