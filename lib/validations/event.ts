@@ -33,3 +33,25 @@ export const createEventSchema = z.object({
 });
 
 export type CreateEventFormValues = z.infer<typeof createEventSchema>;
+
+// 이벤트 수정 폼 스키마 (모든 필드 optional)
+export const updateEventSchema = z.object({
+  title: z
+    .string()
+    .min(3, '이벤트 제목은 3글자 이상이어야 합니다.')
+    .max(100, '이벤트 제목은 100글자 이하여야 합니다.')
+    .optional(),
+
+  description: z
+    .string()
+    .max(500, '설명은 500글자 이하여야 합니다.')
+    .optional(),
+
+  location: z
+    .string()
+    .min(3, '장소는 3글자 이상이어야 합니다.')
+    .max(100, '장소는 100글자 이하여야 합니다.')
+    .optional(),
+});
+
+export type UpdateEventFormValues = z.infer<typeof updateEventSchema>;
