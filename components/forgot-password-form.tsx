@@ -44,7 +44,7 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
             <CardDescription>비밀번호 재설정 안내가 전송되었습니다</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-sm">
               이메일과 비밀번호로 가입하셨다면 비밀번호 재설정 이메일이 발송됩니다.
             </p>
           </CardContent>
@@ -77,7 +77,7 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
-                이미 계정이 있으신가요?{' '}
+                비밀번호가 기억나셨나요?{' '}
                 <Link href="/auth/login" className="underline underline-offset-4">
                   로그인
                 </Link>
