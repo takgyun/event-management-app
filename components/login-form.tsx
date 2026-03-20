@@ -30,7 +30,8 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
       });
       if (error) throw error;
       // Update this route to redirect to an authenticated route. The user already has an active session.
-      router.push('/');
+      // 로그인 성공 후 대시보드로 이동
+      router.push('/protected/dashboard');
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : '오류가 발생했습니다');
     } finally {
@@ -75,6 +76,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
                   type="email"
                   placeholder="m@example.com"
                   required
+                  autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -93,6 +95,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
                   id="password"
                   type="password"
                   required
+                  autoComplete="current-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -108,7 +111,7 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
                   <span className="w-full border-t" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-background px-2 text-muted-foreground">또는</span>
+                  <span className="bg-background text-muted-foreground px-2">또는</span>
                 </div>
               </div>
 

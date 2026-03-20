@@ -84,30 +84,29 @@ export function SignUpForm({ className, ...props }: React.ComponentPropsWithoutR
                   type="email"
                   placeholder="m@example.com"
                   required
+                  autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">비밀번호</Label>
-                </div>
+                <Label htmlFor="password">비밀번호</Label>
                 <Input
                   id="password"
                   type="password"
                   required
+                  autoComplete="new-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="repeat-password">비밀번호 확인</Label>
-                </div>
+                <Label htmlFor="repeat-password">비밀번호 확인</Label>
                 <Input
                   id="repeat-password"
                   type="password"
                   required
+                  autoComplete="new-password"
                   value={repeatPassword}
                   onChange={(e) => setRepeatPassword(e.target.value)}
                 />
@@ -123,7 +122,7 @@ export function SignUpForm({ className, ...props }: React.ComponentPropsWithoutR
                   <span className="w-full border-t" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-background px-2 text-muted-foreground">또는</span>
+                  <span className="bg-background text-muted-foreground px-2">또는</span>
                 </div>
               </div>
 
