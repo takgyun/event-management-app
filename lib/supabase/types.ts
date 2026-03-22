@@ -8,6 +8,121 @@ export type Database = {
   };
   public: {
     Tables: {
+      event_notices: {
+        Row: {
+          author_id: string;
+          content: string;
+          created_at: string;
+          event_id: string;
+          id: string;
+          updated_at: string;
+        };
+        Insert: {
+          author_id: string;
+          content: string;
+          created_at?: string;
+          event_id: string;
+          id?: string;
+          updated_at?: string;
+        };
+        Update: {
+          author_id?: string;
+          content?: string;
+          created_at?: string;
+          event_id?: string;
+          id?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'event_notices_event_id_fkey';
+            columns: ['event_id'];
+            isOneToOne: false;
+            referencedRelation: 'events';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      event_participants: {
+        Row: {
+          applied_at: string;
+          created_at: string;
+          event_id: string;
+          id: string;
+          order_number: number;
+          status: string;
+          updated_at: string;
+          user_id: string;
+        };
+        Insert: {
+          applied_at?: string;
+          created_at?: string;
+          event_id: string;
+          id?: string;
+          order_number: number;
+          status?: string;
+          updated_at?: string;
+          user_id: string;
+        };
+        Update: {
+          applied_at?: string;
+          created_at?: string;
+          event_id?: string;
+          id?: string;
+          order_number?: number;
+          status?: string;
+          updated_at?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'event_participants_event_id_fkey';
+            columns: ['event_id'];
+            isOneToOne: false;
+            referencedRelation: 'events';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      events: {
+        Row: {
+          created_at: string;
+          description: string | null;
+          event_date: string;
+          host_id: string;
+          id: string;
+          location: string;
+          max_capacity: number;
+          status: string;
+          title: string;
+          updated_at: string;
+        };
+        Insert: {
+          created_at?: string;
+          description?: string | null;
+          event_date: string;
+          host_id: string;
+          id?: string;
+          location: string;
+          max_capacity: number;
+          status?: string;
+          title: string;
+          updated_at?: string;
+        };
+        Update: {
+          created_at?: string;
+          description?: string | null;
+          event_date?: string;
+          host_id?: string;
+          id?: string;
+          location?: string;
+          max_capacity?: number;
+          status?: string;
+          title?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       profiles: {
         Row: {
           avatar_url: string | null;
@@ -40,7 +155,14 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      apply_to_event: {
+        Args: { p_event_id: string; p_user_id: string };
+        Returns: Json;
+      };
+      cancel_participation: {
+        Args: { p_event_id: string; p_user_id: string };
+        Returns: Json;
+      };
     };
     Enums: {
       [_ in never]: never;
@@ -172,6 +294,49 @@ export const Constants = {
   },
 } as const;
 
-// 헬퍼 타입
+// ============================================================
+// 헬퍼 타입: 자주 사용하는 Row 타입 축약
+// ============================================================
+
+/** profiles 테이블 Row 타입 */
 export type Profile = Database['public']['Tables']['profiles']['Row'];
 export type ProfileUpdate = Database['public']['Tables']['profiles']['Update'];
+
+/** events 테이블 Row 타입 */
+export type DbEvent = Database['public']['Tables']['events']['Row'];
+export type DbEventInsert = Database['public']['Tables']['events']['Insert'];
+export type DbEventUpdate = Database['public']['Tables']['events']['Update'];
+
+/** event_participants 테이블 Row 타입 */
+export type DbParticipant = Database['public']['Tables']['event_participants']['Row'];
+export type DbParticipantInsert = Database['public']['Tables']['event_participants']['Insert'];
+export type DbParticipantUpdate = Database['public']['Tables']['event_participants']['Update'];
+
+/** event_notices 테이블 Row 타입 */
+export type DbNotice = Database['public']['Tables']['event_notices']['Row'];
+export type DbNoticeInsert = Database['public']['Tables']['event_notices']['Insert'];
+export type DbNoticeUpdate = Database['public']['Tables']['event_notices']['Update'];
+
+/** DB 함수 반환 타입: apply_to_event */
+export interface ApplyToEventResult {
+  success: boolean;
+  participantId?: string;
+  status?: 'confirmed' | 'waitlist';
+  orderNumber?: number;
+  message: string;
+  error?: string;
+  currentStatus?: string;
+}
+
+/** DB 함수 반환 타입: cancel_participation */
+export interface CancelParticipationResult {
+  success: boolean;
+  message: string;
+  error?: string;
+  promoted?: {
+    userId: string;
+    participantId: string;
+    newStatus: 'confirmed';
+    orderNumber: number;
+  };
+}

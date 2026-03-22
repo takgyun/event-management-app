@@ -1,3 +1,6 @@
+// ActionResult 통일된 Server Action 반환 타입
+export type { ActionResult } from './action-result';
+
 // 이벤트 상태 타입
 export type EventStatus = 'active' | 'cancelled' | 'completed';
 
