@@ -5,6 +5,10 @@ import { notFound } from 'next/navigation';
 import { EventForm } from '@/components/events/event-form';
 import { getEventById } from '@/lib/actions/event';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { notFound } from 'next/navigation';
+import { EventForm } from '@/components/events/event-form';
+import { getEventById } from '@/lib/actions/event';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default async function EditEventPage({ params }: { params: Promise<{ id: string }> }) {
   // Next.js 15: params는 Promise로 처리

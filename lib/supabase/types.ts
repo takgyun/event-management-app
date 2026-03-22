@@ -163,6 +163,14 @@ export type Database = {
         Args: { p_event_id: string; p_user_id: string };
         Returns: Json;
       };
+      apply_to_event: {
+        Args: { p_event_id: string; p_user_id: string };
+        Returns: Json;
+      };
+      cancel_participation: {
+        Args: { p_event_id: string; p_user_id: string };
+        Returns: Json;
+      };
     };
     Enums: {
       [_ in never]: never;

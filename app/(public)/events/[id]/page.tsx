@@ -31,5 +31,9 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
     >
       <EventDetailContent eventId={id} />
     </Suspense>
+      }
+    >
+      <EventDetailContent eventId={id} />
+    </Suspense>
   );
 }

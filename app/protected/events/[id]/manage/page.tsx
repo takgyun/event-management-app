@@ -101,6 +101,7 @@ export default async function ManageEventPage({ params }: { params: Promise<{ id
         </div>
 
         {/* 참가자 관리 섹션 */}
+        {/* 참가자 관리 섹션 */}
         <section className="space-y-4">
           <div className="flex items-center gap-2">
             <Users className="h-5 w-5" />
@@ -180,6 +181,9 @@ export default async function ManageEventPage({ params }: { params: Promise<{ id
           )}
         </section>
 
+        <Separator />
+
+        {/* 공지사항 섹션 */}
         <Separator />
 
         {/* 공지사항 섹션 */}

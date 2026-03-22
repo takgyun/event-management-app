@@ -28,10 +28,7 @@ export default defineConfig({
   fullyParallel: false,
 
   // 테스트 결과 리포트
-  reporter: [
-    ['html', { outputFolder: 'playwright-report', open: 'never' }],
-    ['list'],
-  ],
+  reporter: [['html', { outputFolder: 'playwright-report', open: 'never' }], ['list']],
 
   // 스크린샷 및 비디오 저장 (실패 시)
   use: {

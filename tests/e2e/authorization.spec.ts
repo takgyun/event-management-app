@@ -1,10 +1,5 @@
 import { test, expect } from '@playwright/test';
-import {
-  signIn,
-  signOut,
-  createEvent,
-  applyToEvent,
-} from './helpers';
+import { signIn, signOut, createEvent, applyToEvent } from './helpers';
 import { TEST_ACCOUNTS } from './test-accounts';
 
 /**
@@ -20,7 +15,6 @@ import { TEST_ACCOUNTS } from './test-accounts';
  * 사전 조건: global-setup.ts에서 테스트 계정이 생성되어 있어야 함
  */
 test.describe('권한 검증', () => {
-
   // ================================================================
   // 테스트 1: 미인증 사용자 /protected 접근 시 로그인 리다이렉트
   // ================================================================
@@ -102,9 +96,7 @@ test.describe('권한 검증', () => {
     }
   });
 
-  test('비로그인 상태에서 이벤트 수정 페이지 직접 접근 시 로그인 리다이렉트', async ({
-    page,
-  }) => {
+  test('비로그인 상태에서 이벤트 수정 페이지 직접 접근 시 로그인 리다이렉트', async ({ page }) => {
     const eventTitle = `수정 권한 테스트 ${Date.now()}`;
 
     // 호스트 로그인 및 이벤트 생성

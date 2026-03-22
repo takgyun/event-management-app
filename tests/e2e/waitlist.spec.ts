@@ -1,11 +1,5 @@
 import { test, expect } from '@playwright/test';
-import {
-  signIn,
-  signOut,
-  createEvent,
-  applyToEvent,
-  cancelEventParticipation,
-} from './helpers';
+import { signIn, signOut, createEvent, applyToEvent, cancelEventParticipation } from './helpers';
 import { TEST_ACCOUNTS } from './test-accounts';
 
 /**

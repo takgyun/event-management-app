@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { EventForm } from '@/components/events/event-form';
+import { EventForm } from '@/components/events/event-form';
 
 export default function CreateEventPage() {
   return (
@@ -15,6 +16,9 @@ export default function CreateEventPage() {
             이벤트 정보를 입력하고 참가자를 모집하세요.
           </p>
         </div>
+
+        {/* 이벤트 생성 폼 */}
+        <EventForm mode="create" />
 
         {/* 이벤트 생성 폼 */}
         <EventForm mode="create" />

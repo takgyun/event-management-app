@@ -1,6 +1,15 @@
 import { Suspense } from 'react';
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { EventsListContent } from '@/components/events/events-list-content';
+
+/**
+ * 이벤트 목록 페이지
+ *
+ * cacheComponents: true 환경에서 cookies() 접근은 Suspense 내부에서만 허용됩니다.
+ * 헤더/버튼 등 정적 콘텐츠는 바깥에 두고, 데이터 페칭은 Suspense로 감쌉니다.
+ */
 import { EventsListContent } from '@/components/events/events-list-content';
 
 /**

@@ -99,12 +99,12 @@ export async function signOut(page: Page): Promise<void> {
   // 로그아웃 버튼 찾기 (헤더 또는 네비게이션에 위치)
   const logoutButton = page.getByRole('button', { name: /로그아웃|Logout/i });
 
-  if (await logoutButton.count() > 0) {
+  if ((await logoutButton.count()) > 0) {
     await logoutButton.first().click();
   } else {
     // 드롭다운 메뉴에서 로그아웃 찾기
     const userMenu = page.getByRole('button', { name: /계정|프로필|user/i });
-    if (await userMenu.count() > 0) {
+    if ((await userMenu.count()) > 0) {
       await userMenu.first().click();
       await page.getByRole('menuitem', { name: /로그아웃/i }).click();
     } else {
