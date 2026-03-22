@@ -1,4 +1,4 @@
-import { chromium, FullConfig } from '@playwright/test';
+import { FullConfig } from '@playwright/test';
 import { createClient } from '@supabase/supabase-js';
 import { config } from 'dotenv';
 import { TEST_ACCOUNTS } from './e2e/test-accounts';
@@ -31,10 +31,11 @@ export default async function globalSetup(_config: FullConfig) {
     await setupWithServiceRole(supabaseUrl, serviceRoleKey);
   } else {
     // ── 방법 2: 브라우저 회원가입 (이메일 확인 비활성화 필요) ──────────────
-    console.warn('[global-setup] 서비스 롤 키 없음. 브라우저로 회원가입 시도...');
-    console.warn('[global-setup] ⚠️  Supabase 대시보드에서 이메일 확인을 비활성화해야 합니다:');
-    console.warn('[global-setup]    Authentication > Settings > Email Confirmation 비활성화');
-    await setupWithBrowser();
+    console.warn('[global-setup] Supabase 대시보드에서 수동으로 테스트 계정을 생성하거나 SUPABASE_SERVICE_ROLE_KEY를 설정하세요.');
+    console.warn('[global-setup] 테스트 계정 이메일:');
+    Object.entries(TEST_ACCOUNTS).forEach(([name, account]) => {
+      console.warn(`  - ${name}: ${account.email}`);
+    });
   }
 }
 
@@ -75,57 +76,3 @@ async function setupWithServiceRole(supabaseUrl: string, serviceRoleKey: string)
   }
 }
 
-async function setupWithBrowser() {
-  const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? 'http://localhost:3000';
-  const browser = await chromium.launch();
-  const context = await browser.newContext();
-  const page = await context.newPage();
-
-  for (const [name, account] of Object.entries(TEST_ACCOUNTS)) {
-    try {
-      // 먼저 로그인 시도 (이미 계정이 있을 수 있음)
-      await page.goto(`${baseURL}/auth/login`);
-      await page.getByLabel('이메일').fill(account.email);
-      await page.getByLabel('비밀번호').fill(account.password);
-      await page.getByRole('button', { name: '로그인', exact: true }).click();
-
-      try {
-        await page.waitForURL(/protected\/dashboard/, { timeout: 5000 });
-        console.warn(`[global-setup] ✓ ${name} (${account.email}) 로그인 성공 (계정 이미 존재)`);
-        // 로그아웃
-        await page.goto(`${baseURL}/`);
-        continue;
-      } catch {
-        // 로그인 실패 → 회원가입 시도
-      }
-
-      // 회원가입
-      await page.goto(`${baseURL}/auth/sign-up`);
-      await page.getByLabel('이메일').fill(account.email);
-      const passwordInputs = page.getByLabel('비밀번호');
-      await passwordInputs.first().fill(account.password);
-      const repeatInput = page.locator('#repeat-password');
-      await repeatInput.fill(account.password);
-      await page.getByRole('button', { name: '회원가입', exact: true }).click();
-
-      // 이메일 확인이 비활성화된 경우: dashboard로 이동
-      // 이메일 확인이 활성화된 경우: sign-up-success로 이동
-      try {
-        await page.waitForURL(/sign-up-success|dashboard|protected/, { timeout: 10000 });
-        if (page.url().includes('dashboard') || page.url().includes('protected')) {
-          console.warn(`[global-setup] ✓ ${name} (${account.email}) 회원가입 및 즉시 활성화`);
-        } else {
-          console.warn(`[global-setup] ⚠️  ${name} (${account.email}) 이메일 확인 필요 - 테스트가 실패할 수 있습니다`);
-        }
-      } catch {
-        // 회원가입 실패 (rate limit 등)
-        const errorText = await page.locator('p.text-red-500, [role="alert"]').textContent().catch(() => '알 수 없는 오류');
-        console.warn(`[global-setup] ⚠️  ${name} (${account.email}) 회원가입 실패: ${errorText}`);
-      }
-    } catch (err) {
-      console.error(`[global-setup] ✗ ${name} 처리 중 오류: ${err}`);
-    }
-  }
-
-  await browser.close();
-}

@@ -1,0 +1,105 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]: 로그인
+      - generic [ref=e8]: 이메일로 계정에 로그인하세요
+    - generic [ref=e10]:
+      - generic [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]: 이메일
+          - textbox "이메일" [ref=e14]:
+            - /placeholder: m@example.com
+            - text: e2e-host-b@test.example.com
+        - generic [ref=e15]:
+          - generic [ref=e16]:
+            - generic [ref=e17]: 비밀번호
+            - link "비밀번호를 잊으셨나요?" [ref=e18] [cursor=pointer]:
+              - /url: /auth/forgot-password
+          - textbox "비밀번호" [active] [ref=e19]: TestPass123!
+        - button "로그인" [ref=e20]
+        - generic [ref=e25]: 또는
+        - button "Google로 로그인" [ref=e26]
+      - generic [ref=e27]:
+        - text: 계정이 없으신가요?
+        - link "회원가입" [ref=e28] [cursor=pointer]:
+          - /url: /auth/sign-up
+  - generic:
+    - generic [ref=e31]:
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - navigation [ref=e34]:
+            - button "previous" [disabled] [ref=e35]:
+              - img "previous" [ref=e36]
+            - generic [ref=e38]:
+              - generic [ref=e39]: 1/
+              - text: "1"
+            - button "next" [disabled] [ref=e40]:
+              - img "next" [ref=e41]
+          - img
+        - generic [ref=e43]:
+          - link "Next.js 16.1.7 (stale) Turbopack" [ref=e44] [cursor=pointer]:
+            - /url: https://nextjs.org/docs/messages/version-staleness
+            - img [ref=e45]
+            - generic "There is a newer version (16.2.1) available, upgrade recommended!" [ref=e47]: Next.js 16.1.7 (stale)
+            - generic [ref=e48]: Turbopack
+          - img
+      - dialog "Build Error" [ref=e50]:
+        - generic [ref=e53]:
+          - generic [ref=e54]:
+            - generic [ref=e55]:
+              - generic [ref=e57]: Build Error
+              - generic [ref=e58]:
+                - button "Copy Error Info" [ref=e59] [cursor=pointer]:
+                  - img [ref=e60]
+                - button "No related documentation found" [disabled] [ref=e62]:
+                  - img [ref=e63]
+                - button "Attach Node.js inspector" [ref=e65] [cursor=pointer]:
+                  - img [ref=e66]
+            - generic [ref=e75]: Ecmascript file had an error
+          - generic [ref=e77]:
+            - generic [ref=e79]:
+              - img [ref=e81]
+              - generic [ref=e84]: ./Develop/Claude-Code/ClaudeCodeMaster/courses/event-management-app/app/protected/events/new/page.tsx (3:10)
+              - button "Open in editor" [ref=e85] [cursor=pointer]:
+                - img [ref=e87]
+            - generic [ref=e90]:
+              - generic [ref=e91]: Ecmascript file had an error
+              - generic [ref=e92]: 1 |
+              - text: import Link from 'next/link';
+              - generic [ref=e93]: 2 |
+              - text: import
+              - generic [ref=e94]: "{"
+              - text: EventForm
+              - generic [ref=e95]: "}"
+              - text: from '@/components/events/event-form'; >
+              - generic [ref=e96]: 3 |
+              - text: import
+              - generic [ref=e97]: "{"
+              - text: EventForm
+              - generic [ref=e98]: "}"
+              - text: from '@/components/events/event-form';
+              - generic [ref=e99]: "|"
+              - text: ^^^^^^^^^
+              - generic [ref=e100]: 4 |
+              - generic [ref=e101]: 5 |
+              - text: export default function CreateEventPage
+              - generic [ref=e102]: "() {"
+              - generic [ref=e103]: 6 |
+              - text: return
+              - generic [ref=e104]: (
+              - generic [ref=e105]: "the name `EventForm` is defined multiple times"
+        - generic [ref=e106]: "1"
+        - generic [ref=e107]: "2"
+    - generic [ref=e112] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=e113]:
+        - img [ref=e114]
+      - button "Open issues overlay" [ref=e118]:
+        - generic [ref=e119]:
+          - generic [ref=e120]: "0"
+          - generic [ref=e121]: "1"
+        - generic [ref=e122]: Issue
+  - alert [ref=e123]
+```

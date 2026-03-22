@@ -1,7 +1,5 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
-import { redirect } from 'next/navigation';
-import { createClient } from '@/lib/supabase/server';
 import { AppHeader } from '@/components/layout/app-header';
 import { AppFooter } from '@/components/layout/app-footer';
 
@@ -18,19 +16,15 @@ export default async function ProtectedLayout({ children }: { children: React.Re
   const supabase = await createClient();
 
   // 서버에서 현재 사용자 인증 확인
-
-  // 서버에서 현재 사용자 인증 확인
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
   // 미인증 사용자는 로그인 페이지로 즉시 리다이렉트
-  // 미인증 사용자는 로그인 페이지로 즉시 리다이렉트
   if (!user) {
     redirect('/auth/login');
   }
 
-  // 인증된 사용자에게만 보호된 콘텐츠 렌더링
   // 인증된 사용자에게만 보호된 콘텐츠 렌더링
   return (
     <div className="bg-background flex min-h-screen flex-col">

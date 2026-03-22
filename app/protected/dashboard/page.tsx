@@ -7,16 +7,7 @@ import { EventCard } from '@/components/events/event-card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { getMyHostedEvents } from '@/lib/actions/event';
 import { getMyParticipatingEvents } from '@/lib/actions/participant';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { getMyHostedEvents } from '@/lib/actions/event';
-import { getMyParticipatingEvents } from '@/lib/actions/participant';
 
-export default async function DashboardPage() {
-  // 내가 주최한 이벤트 조회
-  const hostedResult = await getMyHostedEvents();
-
-  // 내가 참가 중인 이벤트 조회
-  const participatingResult = await getMyParticipatingEvents();
 export default async function DashboardPage() {
   // 내가 주최한 이벤트 조회
   const hostedResult = await getMyHostedEvents();
@@ -62,12 +53,6 @@ export default async function DashboardPage() {
                 description="새로운 이벤트를 만들어보세요."
               />
             )
-            hostedResult.success && (
-              <EmptyState
-                title="아직 주최한 이벤트가 없습니다"
-                description="새로운 이벤트를 만들어보세요."
-              />
-            )
           )}
         </section>
 
@@ -104,12 +89,6 @@ export default async function DashboardPage() {
               })}
             </div>
           ) : (
-            participatingResult.success && (
-              <EmptyState
-                title="참가 중인 이벤트가 없습니다"
-                description="이벤트 목록에서 참가할 이벤트를 찾아보세요."
-              />
-            )
             participatingResult.success && (
               <EmptyState
                 title="참가 중인 이벤트가 없습니다"

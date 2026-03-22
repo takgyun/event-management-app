@@ -18,9 +18,10 @@ test.describe('권한 검증', () => {
   // ================================================================
   // 테스트 1: 미인증 사용자 /protected 접근 시 로그인 리다이렉트
   // ================================================================
-  test('미인증 사용자는 /protected 접근 시 로그인 리다이렉트', async ({ page }) => {
-    // 브라우저 스토리지 초기화 (로그아웃 상태 보장)
-    await page.context().clearCookies();
+  test('미인증 사용자는 /protected 접근 시 로그인 리다이렉트', async ({ browser }) => {
+    // 새로운 context 생성 (로그인 기록 없음)
+    const context = await browser.newContext();
+    const page = await context.newPage();
 
     // /protected 페이지 직접 접근
     await page.goto('/protected/dashboard');
@@ -28,16 +29,22 @@ test.describe('권한 검증', () => {
     // 로그인 페이지로 리다이렉트 확인
     await page.waitForURL(/auth\/login/, { timeout: 10000 });
     await expect(page.getByText('로그인').first()).toBeVisible();
+
+    await context.close();
   });
 
-  test('미인증 사용자는 /protected/events/new 접근 시 로그인 리다이렉트', async ({ page }) => {
-    await page.context().clearCookies();
+  test('미인증 사용자는 /protected/events/new 접근 시 로그인 리다이렉트', async ({ browser }) => {
+    // 새로운 context 생성 (로그인 기록 없음)
+    const context = await browser.newContext();
+    const page = await context.newPage();
 
     await page.goto('/protected/events/new');
 
     // 로그인 페이지로 리다이렉트 확인
     await page.waitForURL(/auth\/login/, { timeout: 10000 });
     await expect(page.getByText('로그인').first()).toBeVisible();
+
+    await context.close();
   });
 
   // ================================================================
