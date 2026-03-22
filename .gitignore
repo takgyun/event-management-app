@@ -54,5 +54,7 @@ next-env.d.ts
 
 # OS
 .DS_Store
+
 Thumbs.db
 bash.exe.stackdump
+*.log
